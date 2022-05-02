@@ -1,23 +1,13 @@
-import logo from './logo.svg';
 import './App.css';
+import Titulo from "./components/titulo";
+import NavBar from "./components/navbar";
 
 function App() {
+ 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div class="gradient leading-relaxed tracking-wide flex flex-col">
+        <NavBar />
+        <Titulo title="Transporte BA" subtitle="Una app que te ayudará a conocer,en tiempo real, donde está el transporte que estás esperando."/>
     </div>
   );
 }
