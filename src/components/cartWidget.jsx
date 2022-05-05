@@ -14,7 +14,7 @@ const CartWidget = () =>{
         <button
                 onClick={mostrarDropdown}
                 id="navAction"
-                className="inline-flex justify-center w-full rounded-md mx-auto lg:mx-0 w-full hover:underline text-gray-800 font-extrabold rounded mt-4 lg:mt-0 py-4 px-8 shadow opacity-75"
+                className="inline-flex justify-center w-full bg-orange-400 hover:bg-yellow-300 rounded-md mx-auto lg:mx-0 w-full hover:underline text-gray-800 font-extrabold rounded mt-4 lg:mt-0 py-4 px-8 shadow opacity-75"
             >
                 Cart
                 <svg className="mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
