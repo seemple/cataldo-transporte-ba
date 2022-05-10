@@ -1,7 +1,7 @@
 
 const Titulo = ({title="APP",subtitle="Lorem Ipsum..."}) =>{
     return ( 
-        <div className="container mx-auto h-screen">
+        <div className="container mx-auto mb-8">
             <div className="text-center px-3 lg:px-0">
                 <h1
                 className="my-4 text-2xl md:text-3xl lg:text-5xl font-black leading-tight"
