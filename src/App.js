@@ -7,8 +7,8 @@ function App() {
  
   return (
     <div className="gradient leading-relaxed tracking-wide flex flex-col">
-        <NavBar />
-        <Titulo title="Transporte BA" subtitle="Una app que te ayudará a conocer,en tiempo real, donde está el transporte que estás esperando."/>
+        <NavBar appName="Tienda DeTodo" />
+        <Titulo title="DeTodo.com" subtitle="Eso que buscábas y no encontrabas, lo conseguís acá!"/>
         <ItemListContainer />
     </div>
   );

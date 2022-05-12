@@ -1,6 +1,6 @@
+import ItemList from "./ItemList";
+import React,{useState,useEffect} from "react";
 
-import ItemCount from "./ItemCount";
-import React,{useState} from "react";
 
 const productos = [
   {
@@ -107,40 +107,36 @@ const productos = [
   },
 ];
 
-/*
-response = fetch('https://fakestoreapi.com/products?limit=5')
-            .then(res=>res.json())
-            .then(json=>console.log(json))
-*/
 
 const getProds = new Promise((resolve,reject)=>{  
-    resolve (productos);
+    
+    function fetchProds(){
+      resolve(productos);
+    }
+
+    setTimeout(fetchProds,2000);
 });
+
 
 export default function ItemListContainer(){
 
     const [cart,setCart] = useState([]);
+    const [products,setProducts] = useState([]);
 
-  const handleOnAddItem =  (cantidad) =>{
-    let newCart = cart.concat({
-      "qty": cantidad
-    });
-    setCart(newCart);
-    console.log(newCart);
-  }
 
-  return(
-  <div className="w-full bg-white mx-auto px-0">
-        <div className="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
-            <h2 className="text-2xl font-extrabold tracking-tight text-gray-900">Nuestros Productos</h2>
+    const handleOnAddItem =  (cantidad) =>{
+      let newCart = cart.concat({
+        "qty": cantidad
+      });
+      setCart(newCart);
+      console.log(newCart);
+    }
 
-            <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-                <ItemCount key="ab1" stock="7" initial="2" onAdd={handleOnAddItem} />
-                <ItemCount key="ab2" stock="3" initial="1" onAdd={handleOnAddItem} />
-                <ItemCount key="ab3" stock="15" initial="4" onAdd={handleOnAddItem} />
-            </div>
+    useEffect(()=>{
+          getProds.then(res=>setProducts(res))
+          .then(res => console.log(products));
+    },[]);
+  
+    return <ItemList items={products} />
 
-        </div>
-    </div>
-);
 }
