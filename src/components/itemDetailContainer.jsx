@@ -1,4 +1,4 @@
-import ItemList from "./ItemList";
+import ItemDetail from "./ItemDetail";
 import React,{useState,useEffect} from "react";
 
 
@@ -108,7 +108,7 @@ const productos = [
 ];
 
 
-const getProds = new Promise((resolve,reject)=>{  
+const getItem = new Promise((resolve,reject)=>{  
     
     function fetchProds(){
       resolve(productos);
@@ -118,27 +118,18 @@ const getProds = new Promise((resolve,reject)=>{
 });
 
 
-export default function ItemListContainer(){
+export default function ItemDetailContainer(){
 
-    const [cart,setCart] = useState([]);
-    const [products,setProducts] = useState([]);
+    const [product,setProduct] = useState([]);
     const [loading,setLoading] = useState(true);
 
 
-    const handleOnAddItem =  (cantidad) =>{
-      let newCart = cart.concat({
-        "qty": cantidad
-      });
-      setCart(newCart);
-      console.log(newCart);
-    }
-
     useEffect(()=>{
-          getProds
-          .then(res=>setProducts(res))
+          getItem
+          .then(res=>setProduct(res))
           .finally(res => setLoading(false));
     },[]);
   
-    return ( loading ? "Cargando..." : <ItemList items={products} /> )
+    return ( loading ? "Cargando..." : <ItemDetail item={product[0]} /> )
 
 }
