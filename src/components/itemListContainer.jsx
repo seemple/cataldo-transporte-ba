@@ -108,21 +108,11 @@ const productos = [
 ];
 
 
-const getProds = new Promise((resolve,reject)=>{  
-    
-    function fetchProds(){
-      resolve(productos);
-    }
-
-    setTimeout(fetchProds,2000);
-});
-
-
 export default function ItemListContainer(){
 
     const [cart,setCart] = useState([]);
     const [products,setProducts] = useState([]);
-
+    const [loading,setLoading] = useState(true);
 
     const handleOnAddItem =  (cantidad) =>{
       let newCart = cart.concat({
@@ -133,10 +123,12 @@ export default function ItemListContainer(){
     }
 
     useEffect(()=>{
-          getProds.then(res=>setProducts(res))
-          .then(res => console.log(products));
+      fetch('https://fakestoreapi.com/products?limit=10')
+        .then(res=>res.json())
+        .then(json=>setProducts(json))
+        .finally(res => setLoading(false));
     },[]);
   
-    return <ItemList items={products} />
+    return ( loading ? "Cargando..." : <ItemList items={products} />)
 
 }
