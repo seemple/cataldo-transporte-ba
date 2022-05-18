@@ -133,11 +133,8 @@ export default function ItemDetailContainer(){
     useEffect(()=>{
       
       getItem(itemId)
-          .then(res=>{
-            console.log(res)
-            setProduct(res)
-          })
-          .catch(err =>setError(true))
+          .then(res => setProduct(res))
+          .catch(err => setError(true))
           .finally(res => setLoading(false));
     },[itemId]);
   
