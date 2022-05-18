@@ -1,6 +1,6 @@
 import ItemList from "./ItemList";
 import React,{useState,useEffect} from "react";
-
+import Loader from "./Loader";
 
 const productos = [
   {
@@ -139,6 +139,6 @@ export default function ItemListContainer(){
           .finally(res => setLoading(false));
     },[]);
   
-    return ( loading ? "Cargando..." : <ItemList items={products} /> )
+    return ( loading ? <Loader /> : <ItemList items={products} /> )
 
 }
