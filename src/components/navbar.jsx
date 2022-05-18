@@ -1,5 +1,6 @@
 
 import CartWidget from "./cartWidget";
+import {Link} from "react-router-dom";
 
 export default function NavBar({appName="Untitled App"}){
     return (
@@ -8,9 +9,8 @@ export default function NavBar({appName="Untitled App"}){
   
 <div className="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 px-2 py-2 lg:py-6">
         <div className="pl-4 flex items-center">
-          <a
+          <Link to="/"
             className="text-white no-underline hover:no-underline font-bold text-2xl lg:text-4xl"
-            href="#"
           >
             <svg
               className="h-6 w-6 inline-block fill-current text-yellow-700"
@@ -20,7 +20,7 @@ export default function NavBar({appName="Untitled App"}){
               <path d="M13 8V0L8.11 5.87 3 12h4v8L17 8h-4z" />
             </svg>
             {appName}
-          </a>
+          </Link>
           </div>
 
         <div className="block lg:hidden pr-4">
@@ -45,28 +45,20 @@ export default function NavBar({appName="Untitled App"}){
         >
           <ul className="list-reset lg:flex justify-end flex-1 items-center">
             <li className="mr-3">
-              <a
-                className="inline-block py-2 px-4 text-black font-bold no-underline"
-                href="#"
-                >Active</a
-              >
+              <Link to="/"
+                className="inline-block py-2 px-4 text-black font-bold no-underline">Home</Link>
             </li>
             <li className="mr-3">
-              <a
-                className="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4"
-                href="#"
-                >link</a
-              >
+              <Link to="/categories"
+                className="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4">Categorias</Link>
+
             </li>
             <li className="mr-3">
-              <a
-                className="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4"
-                href="#"
-                >link</a
-              >
+              <Link to="/favs"
+                className="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4">Favorites</Link>
+              
             </li>
           </ul>
-          
 
           <CartWidget />
 
