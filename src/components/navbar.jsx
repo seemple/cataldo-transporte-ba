@@ -1,15 +1,18 @@
 
 import CartWidget from "./cartWidget";
-import {Link} from "react-router-dom";
+import {Link, NavLink} from "react-router-dom";
 
 export default function NavBar({appName="Untitled App"}){
+
+    let navItemStyles = "inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4";
+
     return (
     <nav id="header" className="w-full z-30 top-0 text-white py-1 lg:py-6">
 
   
-<div className="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 px-2 py-2 lg:py-6">
+    <div className="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 px-2 py-2 lg:py-6">
         <div className="pl-4 flex items-center">
-          <Link to="/"
+          <NavLink to="/"
             className="text-white no-underline hover:no-underline font-bold text-2xl lg:text-4xl"
           >
             <svg
@@ -20,7 +23,7 @@ export default function NavBar({appName="Untitled App"}){
               <path d="M13 8V0L8.11 5.87 3 12h4v8L17 8h-4z" />
             </svg>
             {appName}
-          </Link>
+          </NavLink>
           </div>
 
         <div className="block lg:hidden pr-4">
@@ -45,17 +48,19 @@ export default function NavBar({appName="Untitled App"}){
         >
           <ul className="list-reset lg:flex justify-end flex-1 items-center">
             <li className="mr-3">
-              <Link to="/"
-                className="inline-block py-2 px-4 text-black font-bold no-underline">Home</Link>
+              <NavLink activeClassName="font-bold" to="/"
+                className={({ isActive }) =>
+                isActive ? `${navItemStyles} font-bold` : navItemStyles
+              }>Home</NavLink>
             </li>
             <li className="mr-3">
-              <Link to="/categories"
-                className="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4">Categorias</Link>
+              <NavLink to="/categories"
+                className="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4">Categorias</NavLink>
 
             </li>
             <li className="mr-3">
-              <Link to="/favs"
-                className="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4">Favorites</Link>
+              <NavLink to="/favs"
+                className="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4">Favorites</NavLink>
               
             </li>
           </ul>
@@ -65,7 +70,8 @@ export default function NavBar({appName="Untitled App"}){
         </div>
         
         </div>
+    
     </nav>
-
     );
+
 }

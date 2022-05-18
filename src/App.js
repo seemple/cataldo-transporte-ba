@@ -14,7 +14,7 @@ function App() {
           <Titulo title="DeTodo.com" subtitle="Eso que buscábas y no encontrabas, lo conseguís acá!"/>
           <Routes>
             <Route exact path="/" element={<ItemListContainer />} />
-            <Route exact path="/producto/:itemId" element={<ItemDetailContainer />} />
+            <Route exact path="/product/:itemId" element={<ItemDetailContainer />} />
           </Routes>
       </div>
     </BrowserRouter>
