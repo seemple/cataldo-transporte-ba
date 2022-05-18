@@ -2,7 +2,7 @@
 import CartWidget from "./cartWidget";
 import {Link, NavLink} from "react-router-dom";
 
-export default function NavBar({appName="Untitled App"}){
+export default function NavBar({appName="Untitled App",categories}){
 
     let navItemStyles = "inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4";
 
@@ -53,11 +53,15 @@ export default function NavBar({appName="Untitled App"}){
                 isActive ? `${navItemStyles} font-bold` : navItemStyles
               }>Home</NavLink>
             </li>
-            <li className="mr-3">
-              <NavLink to="/categories"
-                className="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4">Categorias</NavLink>
+            { categories.map((item,i)=>{
+            
+            return (<li className="mr-3" key={i}>
+              <NavLink to={`/category/${item}`}
+                className="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4">{item}</NavLink>
 
-            </li>
+            </li>)
+
+            })}
             <li className="mr-3">
               <NavLink to="/favs"
                 className="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4">Favorites</NavLink>
