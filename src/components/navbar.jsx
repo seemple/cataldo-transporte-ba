@@ -1,18 +1,14 @@
 
 import CartWidget from "./cartWidget";
 import {NavLink} from "react-router-dom";
-
-// Hay que importar el hook de Context
-import {useContext} from "react";
-
 // Hay que importar el context que he creado en el padre 
-import {ContextApp} from "../context/cartContext";
+import {useCartContext} from "../context/cartContext";
 
 
 export default function NavBar({appName="Untitled App"}){
 
     // Aqui ya "consumo" la data del context
-    const {categories} = useContext(ContextApp)
+    const {categories} = useCartContext()
 
     let navItemStyles = "inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4";
 

@@ -1,21 +1,11 @@
 import ItemList from "./ItemList";
 import React,{useState,useEffect} from "react";
 import { useParams } from "react-router-dom";
-import { productos } from "../data";
-
 import Loader from "./Loader";
-const productosData = productos();
 
-const getProds = (categoryId=null) =>{
+// Hay que importar el context que he creado en el padre 
+import {useCartContext} from "../context/cartContext";
 
-  let selectedItems = categoryId ? productosData.filter((item)=> item.category == categoryId) : productosData;
-  return new Promise((resolve,reject)=>{  
-    setTimeout(()=>{
-      selectedItems ? resolve(selectedItems) : reject(new Error("No se encontraron los productos seleccionados"));
-    },2000);
-  });
-
-}
 
 export default function ItemListContainer(){
 
@@ -25,6 +15,20 @@ export default function ItemListContainer(){
     const [error,setError] = useState(false);
     const {categoryId=null} = useParams();
 
+    // Aqui ya "consumo" la data del context
+    const {productosData} = useCartContext()
+
+    // Esta promesa procesa los datos del context
+    const getProds = (categoryId=null) =>{
+
+      let selectedItems = categoryId ? productosData.filter((item)=> item.category == categoryId) : productosData;
+      return new Promise((resolve,reject)=>{  
+        setTimeout(()=>{
+          selectedItems ? resolve(selectedItems) : reject(new Error("No se encontraron los productos seleccionados"));
+        },2000);
+      });
+
+    }
 
     const handleOnAddItem =  (cantidad) =>{
       let newCart = cart.concat({

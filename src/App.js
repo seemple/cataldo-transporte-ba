@@ -4,18 +4,16 @@ import NavBar from "./components/navbar";
 import ItemListContainer from "./components/itemListContainer";
 import ItemDetailContainer from "./components/itemDetailContainer";
 import {BrowserRouter, Routes, Route} from "react-router-dom";
-import { getUnique } from "./helpers";
-import { productos } from "./data";
-import { ContextApp } from "./context/cartContext";
+
+// Importamos el contexto exportado en un modulo aparte.
+import CartContextProvider from "./context/cartContext.js";
 
 function App() {
  
-  const productosData = productos();
-  const categories = getUnique(productosData);
 
   return (
     // El metodo PROVIDER va a proveer a mis hijos, funciones y estados a nivel global
-    <ContextApp.Provider value={{ productosData, categories }}>
+    <CartContextProvider>
       <BrowserRouter>
         <div className="gradient leading-relaxed tracking-wide flex flex-col">
             <NavBar appName="Tienda DeTodo" />
@@ -27,7 +25,7 @@ function App() {
             </Routes>
         </div>
       </BrowserRouter>
-    </ContextApp.Provider>
+    </CartContextProvider>
   );
 }
 
