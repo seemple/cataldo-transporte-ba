@@ -1,6 +1,43 @@
+import React,{useState} from "react";
 import {Link} from "react-router-dom";
+import ItemCount from "./ItemCount";
 
 export default function ItemDetail({item,hasError}){
+
+	const [cart,setCart] = useState([]);
+
+
+	const handleOnAddItem =  (cantidad,item) =>{
+
+		let newCart = [];
+
+		function checkIfExists(id) {
+			return (cart.find( i => i.id == id)) 
+		};
+	
+
+		if(checkIfExists(item.id)) {
+			
+			newCart = cart.map((i) => {
+				if(i.id == item.id) i.qty += cantidad;
+				return (i);
+			});
+	
+		} else{
+
+			newCart = cart.concat({
+				"id": item.id,
+				"product":item.title,
+				"qty": cantidad
+			});
+
+		}
+
+		setCart(newCart);
+
+		console.log("CART STATUS:"+JSON.stringify(newCart));
+	  
+	}
 
 	return (
 	
@@ -99,7 +136,7 @@ export default function ItemDetail({item,hasError}){
 						<a href="#" className="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500">117 reviews</a>
 					</div>
 					</div>
-					<form className="mt-10">
+					<div className="mt-10">
 					{/* Colors */}
 					<div>
 						<h3 className="text-sm text-gray-900 font-medium">Color</h3>
@@ -225,8 +262,12 @@ export default function ItemDetail({item,hasError}){
 						</div>
 						</fieldset>
 					</div>
-					<button type="submit" className="mt-10 w-full bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Add to bag</button>
-					</form>
+
+					<ItemCount stock="5" item={item} initial="1" onAdd={handleOnAddItem} />
+
+					{//<button type="submit" className="mt-10 w-full bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Add to bag</button>
+					}
+					</div>
 				</div>
 				
 				<div className="py-10 lg:pt-6 lg:pb-16 lg:col-start-1 lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">

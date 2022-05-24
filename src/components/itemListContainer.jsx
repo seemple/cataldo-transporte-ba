@@ -9,7 +9,6 @@ import {useCartContext} from "../context/cartContext";
 
 export default function ItemListContainer(){
 
-    const [cart,setCart] = useState([]);
     const [products,setProducts] = useState([]);
     const [loading,setLoading] = useState(true);
     const [error,setError] = useState(false);
@@ -28,13 +27,6 @@ export default function ItemListContainer(){
         },2000);
       });
 
-    }
-
-    const handleOnAddItem =  (cantidad) =>{
-      let newCart = cart.concat({
-        "qty": cantidad
-      });
-      setCart(newCart);
     }
 
     useEffect(()=>{

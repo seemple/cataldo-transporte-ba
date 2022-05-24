@@ -1,18 +1,27 @@
 import React, {useState} from "react";
+import SidebarCart from "./SidebarCart";
 
 const CartWidget = () =>{
 
     const [visible,setVisible] = useState(false);
 
-   function mostrarDropdown(){
+   function mostrarPanel(){
        setVisible((visible === false ? true : false));       
    }
    
+   function closePanel(){
+        setVisible(false);
+    }    
+
+
    return (
-    <div className="relative inline-block text-left">
+
+        <>
+        <SidebarCart show={visible} onClose={closePanel} />
+        <div className="relative inline-block text-left">
         <div>    
         <button
-                onClick={mostrarDropdown}
+                onClick={mostrarPanel}
                 id="navAction"
                 className="inline-flex justify-center w-full bg-orange-400 hover:bg-yellow-300 rounded-md mx-auto lg:mx-0 w-full hover:underline text-gray-800 font-extrabold rounded mt-4 lg:mt-0 py-4 px-8 shadow opacity-75"
             >
@@ -23,18 +32,8 @@ const CartWidget = () =>{
         </button>
         </div>
 
-        <div className={`${!visible ? "hidden" : ""} origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none`} role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
-            <div className="py-1" role="none">
-            <a href="#" className="text-gray-700 block px-4 py-2 text-sm hover:underline" role="menuitem" tabindex="-1" id="menu-item-0">Account settings</a>
-            <a href="#" className="text-gray-700 block px-4 py-2 text-sm hover:underline" role="menuitem" tabindex="-1" id="menu-item-1">Support</a>
-            <a href="#" className="text-gray-700 block px-4 py-2 text-sm hover:underline" role="menuitem" tabindex="-1" id="menu-item-2">License</a>
-            <form method="POST" action="#" role="none">
-                <button type="submit" className="text-gray-700 block w-full text-left px-4 py-2 text-sm hover:underline" role="menuitem" tabindex="-1" id="menu-item-3">Sign out</button>
-            </form>
-            </div>
-        </div>
-
     </div>
+    </>
     );
 
 }
