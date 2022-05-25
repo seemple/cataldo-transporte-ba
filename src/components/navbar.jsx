@@ -1,7 +1,8 @@
 
-import CartWidget from "./cartWidget";
-
 import {NavLink} from "react-router-dom";
+
+
+import CartWidget from "./cartWidget";
 // Hay que importar el context que he creado en el padre 
 import {useCartContext} from "../context/cartContext";
 

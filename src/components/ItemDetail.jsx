@@ -1,43 +1,19 @@
-import React,{useState} from "react";
+import React from "react";
 import {Link} from "react-router-dom";
 import ItemCount from "./ItemCount";
 
+
+// Hay que importar el context que he creado en el padre 
+import {useCartContext} from "../context/cartContext";
+
+
 export default function ItemDetail({item,hasError}){
 
-	const [cart,setCart] = useState([]);
+    // Aqui ya "consumo" la data del context
+    const {handleOnAddItem} = useCartContext()
+    const {cart} = useCartContext()
 
-
-	const handleOnAddItem =  (cantidad,item) =>{
-
-		let newCart = [];
-
-		function checkIfExists(id) {
-			return (cart.find( i => i.id == id)) 
-		};
-	
-
-		if(checkIfExists(item.id)) {
-			
-			newCart = cart.map((i) => {
-				if(i.id == item.id) i.qty += cantidad;
-				return (i);
-			});
-	
-		} else{
-
-			newCart = cart.concat({
-				"id": item.id,
-				"product":item.title,
-				"qty": cantidad
-			});
-
-		}
-
-		setCart(newCart);
-
-		console.log("CART STATUS:"+JSON.stringify(newCart));
-	  
-	}
+	console.log("DETAIL - CART STATUS:"+JSON.stringify(cart));
 
 	return (
 	
