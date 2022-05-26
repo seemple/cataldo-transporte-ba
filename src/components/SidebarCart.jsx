@@ -1,5 +1,5 @@
 import React from "react";
-import {Link} from "react-router-dom";
+import {Link,NavLink} from "react-router-dom";
 
 // Hay que importar el context que he creado en el padre 
 import {useCartContext} from "../context/cartContext";
@@ -7,7 +7,7 @@ import {useCartContext} from "../context/cartContext";
 
 export default function SidebarCart({show,onClose}){
     
-    const {cart} = useCartContext()
+    const {cart,removeItem,removeAllItems} = useCartContext()
 
     return(
 
@@ -65,7 +65,7 @@ export default function SidebarCart({show,onClose}){
                                                             <p className="text-gray-500">Cantidad: {item.qty}</p>
 
                                                             <div className="flex">
-                                                                <button type="button" 
+                                                                <button type="button" onClick={()=>removeItem(item.id)}
                                                                     className="font-medium text-indigo-600 hover:text-indigo-500">Quitar</button>
                                                             </div>
                                                         </div>
@@ -87,14 +87,12 @@ export default function SidebarCart({show,onClose}){
                                     <p className="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.
                                     </p>
                                     <div className="mt-6">
-                                        <a href="#"
-                                            className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700">Checkout</a>
+                                    <NavLink to={`/cart`} className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700">Checkout</NavLink>
                                     </div>
                                     <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
                                         <p>
-                                            or <button type="button"
-                                                className="font-medium text-indigo-600 hover:text-indigo-500">Continue
-                                                Shopping<span aria-hidden="true"> &rarr;</span></button>
+                                            o <button type="button" onClick={()=>removeAllItems()}
+                                                className="font-medium text-indigo-600 hover:text-indigo-500">Vaciar Carrito<span aria-hidden="true"> &rarr;</span></button>
                                         </p>
                                     </div>
                                 </div>

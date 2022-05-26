@@ -21,7 +21,15 @@ const CartContextProvider = ({children}) =>{
         return (cart.find( i => i.id == id)) 
     };
 
-   
+    
+    const removeItem = (id) => {
+        setCart(cart.filter(item => item.id !== id))
+    }
+
+    const removeAllItems = (id) => {
+        setCart([]);
+    }
+
 	const handleOnAddItem = (cantidad,item) =>{
 
 		let newCart = [];
@@ -30,7 +38,7 @@ const CartContextProvider = ({children}) =>{
 		if(isInCart(item.id)) {
 			
 			newCart = cart.map((i) => {
-				if(i.id == item.id) i.qty += cantidad;
+				if(i.id == item.id) i.qty += parseInt(cantidad);
 				return (i);
 			});
 	
@@ -52,7 +60,7 @@ const CartContextProvider = ({children}) =>{
     }
     
     return (
-        <contextCart.Provider value={{ productosData, categories,cart,handleOnAddItem }}>
+        <contextCart.Provider value={{ productosData, categories,cart,handleOnAddItem,removeItem,removeAllItems }}>
             {children}
         </contextCart.Provider>
     )

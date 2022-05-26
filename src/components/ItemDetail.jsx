@@ -13,7 +13,6 @@ export default function ItemDetail({item,hasError}){
     const {handleOnAddItem} = useCartContext()
     const {cart} = useCartContext()
 
-	console.log("DETAIL - CART STATUS:"+JSON.stringify(cart));
 
 	return (
 	
