@@ -1,5 +1,26 @@
+import {useEffect,useState} from "react";
+import {getFirestore,doc, getDoc, getDocs, collection} from "firebase/firestore";
+import firebaseConnect from "../data/firebase";
+
 export default function Cart(){
-    
+
+    const [producto,setProducto] = useState({});
+    const [productos,setProductos] = useState([]);
+
+    useEffect(() => {
+
+        firebaseConnect();
+        const db = getFirestore();
+        const dbQuery = doc(db,"productos","4IPyrxaEOM9TPgMp7VDY");
+        getDoc(dbQuery)
+        .then(response => setProducto({id: response.id, ...response.data()}))
+
+        const queryCollection = collection(db,"productos");
+        getDocs(queryCollection).then(resp => setProductos(resp.docs.map(item => ({id: item.id, ...item.data()}))))
+
+    },[]);
+
+
     return(
 
            <div className="bg-white">
