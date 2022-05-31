@@ -10,7 +10,7 @@ import {useCartContext} from "../context/cartContext";
 export default function NavBar({appName="Untitled App"}){
 
     // Aqui ya "consumo" la data del context
-    const {categories} = useCartContext()
+    const {categories,cart} = useCartContext()
 
     let navItemStyles = "inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4";
 
@@ -73,14 +73,10 @@ export default function NavBar({appName="Untitled App"}){
             </li>)
 
             })}
-            <li className="mr-3">
-              <NavLink to="/favs"
-                className="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4">Favorites</NavLink>
-              
-            </li>
+
           </ul>
 
-          <CartWidget />
+          {cart.length >0 && <CartWidget />}
 
         </div>
         

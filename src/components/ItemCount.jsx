@@ -50,7 +50,7 @@ export default function ItemCount({stock=1,initial=1,item,onAdd}){
                         <span className="m-auto text-2xl font-thin">+</span>
                     </button>
                 
-                    <button data-action="add_cart" onClick={addToCart} className="w-full ml-3 bg-blue-600 text-gray-200 hover:text-gray-700 hover:bg-gray-400 h-full px-2 text-sm bg-gray-100 rounded cursor-pointer">
+                    <button data-action="add_cart" onClick={addToCart} className="w-full ml-3 bg-blue-400 text-gray-800 hover:text-white hover:bg-blue-700 h-full px-2 text-sm rounded cursor-pointer">
                             <span className="m-auto font-thin">Agregar al carrito</span>
                     </button>
                 
@@ -60,10 +60,10 @@ export default function ItemCount({stock=1,initial=1,item,onAdd}){
                 
                 <div className="w-full mt-5">
                     <div class="inline-flex">
-                    <button onClick={()=>keepCart()} className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l">
+                    <button onClick={()=>keepCart()} className="bg-blue-400 text-gray-800  hover:bg-blue-700 hover:text-white font-bold py-2 px-4 rounded-l">
                         Seguir Comprando
                     </button>
-                    <Link to="/cart" className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-r">
+                    <Link to="/cart" className="bg-blue-300 text-gray-800 hover:bg-blue-700 hover:text-white font-bold py-2 px-4 rounded-r">
                         Finalizar compra
                     </Link>
                     </div>

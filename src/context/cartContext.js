@@ -58,7 +58,7 @@ const CartContextProvider = ({children}) =>{
                 "image":item.image,
                 "price":item.price,
                 "description":item.description,
-				"qty": cantidad
+				"qty": parseInt(cantidad)
 			});
 
 		}
