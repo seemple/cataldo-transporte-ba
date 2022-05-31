@@ -16,11 +16,19 @@ const CartContextProvider = ({children}) =>{
     const categories = getUnique(productosData);
   
     const [cart,setCart] = useState([]);
+    const [total,setTotal] = useState(0);
 
     const isInCart = (id) => {
         return (cart.find( i => i.id == id)) 
     };
 
+    const getTotalCart = () =>{
+        let totalCart = cart.reduce((prev,next)=>{
+            let nextPrice = next.qty * next.price
+            return (prev+nextPrice);
+        },0)
+        setTotal(totalCart);
+    }
     
     const removeItem = (id) => {
         setCart(cart.filter(item => item.id !== id))
@@ -60,7 +68,7 @@ const CartContextProvider = ({children}) =>{
     }
     
     return (
-        <contextCart.Provider value={{ productosData, categories,cart,handleOnAddItem,removeItem,removeAllItems }}>
+        <contextCart.Provider value={{ productosData, categories,cart,total,handleOnAddItem,removeItem,removeAllItems,getTotalCart }}>
             {children}
         </contextCart.Provider>
     )

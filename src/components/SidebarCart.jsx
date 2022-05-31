@@ -1,5 +1,6 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
 import {Link,NavLink} from "react-router-dom";
+
 
 // Hay que importar el context que he creado en el padre 
 import {useCartContext} from "../context/cartContext";
@@ -7,7 +8,11 @@ import {useCartContext} from "../context/cartContext";
 
 export default function SidebarCart({show,onClose}){
     
-    const {cart,removeItem,removeAllItems} = useCartContext()
+    const {cart,removeItem,removeAllItems,getTotalCart,total} = useCartContext();
+
+    useEffect(()=>{
+        getTotalCart();
+    });
 
     return(
 
@@ -41,9 +46,13 @@ export default function SidebarCart({show,onClose}){
                                         <div className="flow-root">
                                             <ul className="-my-6 divide-y divide-gray-200">
                                                 
-                                                {cart.map((item) =>{
+                                                {                                               
+                                                cart.map((item) =>{
+                                                
+                                                let subTotal = (item.qty * item.price);
+
                                                 return(
-                                                <li className="flex py-6">
+                                                <li className="flex py-6" key={item.id}>
                                                     <div
                                                         className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
                                                         <img src={item.image}
@@ -58,7 +67,7 @@ export default function SidebarCart({show,onClose}){
                                                                 <h3>
                                                                 <Link to={`/product/${item.id}`}> {item.title} </Link>
                                                                 </h3>
-                                                                <p className="ml-4">$ {item.price}</p>
+                                                                <p className="ml-4">$ {subTotal}</p>
                                                             </div>
                                                         </div>
                                                         <div className="flex flex-1 items-end justify-between text-sm">
@@ -82,7 +91,7 @@ export default function SidebarCart({show,onClose}){
                                 <div className="border-t border-gray-200 py-6 px-4 sm:px-6">
                                     <div className="flex justify-between text-base font-medium text-gray-900">
                                         <p>Subtotal</p>
-                                        <p>$262.00</p>
+                                        <p>${total}</p>
                                     </div>
                                     <p className="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.
                                     </p>
