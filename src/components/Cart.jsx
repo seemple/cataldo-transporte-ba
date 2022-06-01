@@ -3,8 +3,6 @@ import {useCartContext} from "../context/cartContext";
 import {Link} from "react-router-dom";
 import Item from "./Item";
 import {useEffect,useState} from "react";
-import {getFirestore,doc, getDoc, getDocs, collection} from "firebase/firestore";
-import firebaseConnect from "../data/firebase";
 
 export default function Cart(){
     

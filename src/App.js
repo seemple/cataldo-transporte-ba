@@ -5,8 +5,8 @@ import Cart from "./components/Cart";
 import ItemListContainer from "./components/itemListContainer";
 import ItemDetailContainer from "./components/itemDetailContainer";
 import {BrowserRouter, Routes, Route} from "react-router-dom";
-import firebaseConnect from "./data/firebase";
 import {useEffect} from "react";
+import ImportData from "./data/importData";
 
 // Importamos el contexto exportado en un modulo aparte.
 import CartContextProvider from "./context/cartContext.js";
@@ -14,8 +14,8 @@ import CartContextProvider from "./context/cartContext.js";
 function App() {
  
   useEffect(()=>{
-    firebaseConnect();
-  });
+
+  },[]);
 
   return (
     // El metodo PROVIDER va a proveer a mis hijos, funciones y estados a nivel global
@@ -29,6 +29,7 @@ function App() {
               <Route exact path="/category/:categoryId" element={<ItemListContainer />} />
               <Route exact path="/product/:itemId" element={<ItemDetailContainer />} />
               <Route exact path="/cart" element={<Cart/>} />
+              <Route exact path="/importar-productos" element={<ImportData/>} />
             </Routes>
         </div>
       </BrowserRouter>

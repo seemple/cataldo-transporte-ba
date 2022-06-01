@@ -1,6 +1,6 @@
 import { createContext,useContext,useState } from "react";
 import { getUnique } from "../helpers";
-import { productos } from "../data";
+import productos from "../data";
 
 // Creamos el contexto de la App.
 const contextCart = createContext([]);
@@ -8,11 +8,26 @@ const contextCart = createContext([]);
 // Exporto el useContext para consumir los datos facilmente y ahorrar imports.
 export const useCartContext = () => useContext(contextCart);
 
+
 // Creamos el provider con estado y funciones globales. 
 const CartContextProvider = ({children}) =>{
 
+    
     // Aca van estado y funciones globales
-    const productosData = productos();
+
+    const productosData = [];
+    productos().then(resp => resp.map(item => {
+        productosData.push(item.data());
+    }));
+
+    console.log(productosData);
+
+    /*
+    const productosData = productos().then(resp =>{
+        return (resp.docs.map(item => ({id: item.id, ...item.data()})))
+    });
+    */
+
     const categories = getUnique(productosData);
   
     const [cart,setCart] = useState([]);

@@ -2,13 +2,12 @@ import ItemDetail from "./ItemDetail";
 import React,{useState,useEffect} from "react";
 import { useParams } from "react-router-dom";
 import Loader from "./Loader";
-import { productos } from "../data";
+import {useCartContext} from "../context/cartContext";
 
-const productosData = productos();
+const getItem = (itemId=null,productos) =>{
 
-const getItem = (itemId=null) =>{
 
-  let selectedItem = itemId ? productosData.find((item)=> item.id == itemId) : null;
+  let selectedItem = itemId ? productos.find((item)=> item.id == itemId) : null;
   
   return new Promise((resolve,reject)=>{  
     setTimeout(()=>{
@@ -25,10 +24,12 @@ export default function ItemDetailContainer(){
     const [error,setError] = useState(false);
     const [loading,setLoading] = useState(true);
     const {itemId} = useParams();
+    const {productosData} = useCartContext();
+
 
     useEffect(()=>{
       
-      getItem(itemId)
+      getItem(itemId,productosData)
           .then(res => setProduct(res))
           .catch(err => setError(true))
           .finally(res => setLoading(false));
