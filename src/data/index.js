@@ -7,7 +7,9 @@ function productos(){
   const db = getFirestore();
 
   const queryCollection = collection(db,"productos");
-  return (getDocs(queryCollection).then(resp => resp.docs));
+  return new Promise((resolve,reject)=>{  
+    db ? resolve(getDocs(queryCollection).then(resp => resp.docs)) : reject(new Error("No se pudo conectar a firebase"));
+  });
 
 };
 

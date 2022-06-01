@@ -11,7 +11,6 @@ export default function ItemListContainer(){
 
     // Aqui ya "consumo" la data del context
     const {productosData} = useCartContext()
-    const {cart} = useCartContext()
     
     const [products,setProducts] = useState([]);
     const [loading,setLoading] = useState(true);

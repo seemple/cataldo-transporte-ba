@@ -1,16 +1,23 @@
 
 import {NavLink} from "react-router-dom";
-
-
-import CartWidget from "./cartWidget";
-// Hay que importar el context que he creado en el padre 
+import { getUnique } from "../helpers";
 import {useCartContext} from "../context/cartContext";
+import CartWidget from "./cartWidget";
+import React,{useState,useEffect} from "react";
+
+// Hay que importar el context que he creado en el padre 
 
 
 export default function NavBar({appName="Untitled App"}){
 
     // Aqui ya "consumo" la data del context
-    const {categories,cart} = useCartContext()
+    const {cart,productosData} = useCartContext();
+    const [categories,setCategories] = useState([]);
+    
+    useEffect(()=>{
+      setCategories(getUnique(productosData));
+    })
+
 
     let navItemStyles = "inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4";
 
@@ -64,9 +71,9 @@ export default function NavBar({appName="Untitled App"}){
                 isActive ? `${navItemStyles} font-bold` : navItemStyles
               }>Home</NavLink>
             </li>
-            { categories.map((item,i)=>{
+            { categories.map((item,index)=>{
             
-            return (<li className="mr-3" key={i}>
+            return (<li className="mr-3" key={index}>
               <NavLink to={`/category/${item}`}
                 className="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4">{item}</NavLink>
 

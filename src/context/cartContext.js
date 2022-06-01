@@ -1,5 +1,4 @@
 import { createContext,useContext,useState } from "react";
-import { getUnique } from "../helpers";
 import productos from "../data";
 
 // Creamos el contexto de la App.
@@ -16,20 +15,12 @@ const CartContextProvider = ({children}) =>{
     // Aca van estado y funciones globales
 
     const productosData = [];
+    
     productos().then(resp => resp.map(item => {
         productosData.push(item.data());
     }));
 
-    console.log(productosData);
-
-    /*
-    const productosData = productos().then(resp =>{
-        return (resp.docs.map(item => ({id: item.id, ...item.data()})))
-    });
-    */
-
-    const categories = getUnique(productosData);
-  
+   
     const [cart,setCart] = useState([]);
     const [total,setTotal] = useState(0);
 
@@ -83,7 +74,7 @@ const CartContextProvider = ({children}) =>{
     }
     
     return (
-        <contextCart.Provider value={{ productosData, categories,cart,total,handleOnAddItem,removeItem,removeAllItems,getTotalCart }}>
+        <contextCart.Provider value={{ productosData,cart,total,handleOnAddItem,removeItem,removeAllItems,getTotalCart }}>
             {children}
         </contextCart.Provider>
     )
