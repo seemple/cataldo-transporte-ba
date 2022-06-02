@@ -19,6 +19,7 @@ const getItem = (itemId=null) =>{
     dbQuery = doc(db,"productos",itemId); 
     selectedItem = getDoc(dbQuery).then(response => {
       return({
+        id: response.id,
         ...response.data()
       })
     });
@@ -39,9 +40,6 @@ export default function ItemDetailContainer(){
     const [error,setError] = useState(false);
     const [loading,setLoading] = useState(true);
     const {itemId} = useParams();
-    const {productosData} = useCartContext();
-
-
 
     useEffect(()=>{
       
