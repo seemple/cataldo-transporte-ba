@@ -9,28 +9,30 @@ const productosData = productos();
 const ImportData = () =>{
 
     const [imported,setImported] = useState(false);
+    const [prods,setProds] = useState([]);
 
-    const insertDocs = () =>{
+    
+    const insertDocs = async () =>{
 
-        productosData.map(async(item)=>{
-            
+        for (let producto of productosData) {
             const db = getFirestore();
             const queryCollection = collection(db,"productos");
-            const res = await addDoc(queryCollection,{...item});
+            const res = await addDoc(queryCollection,{...producto});
+            setProds(prods =>[...prods,producto]);
+        };
 
-            console.log(`Producto ${res.title} importado correctamente.`);
-            return(`Producto ${res.title} importado correctamente.`);
-    
-        });
+    }
 
+    const handleInsertDocs = (e) =>{
+        e.preventDefault();
+        insertDocs();
         setImported(true);
-        
     }
 
     useEffect(() => {
 
         firebaseConnect();
-    
+
     });
 
      
@@ -39,21 +41,25 @@ const ImportData = () =>{
         <div className="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
 
         <div className="mt-6 mx-auto columns-1 text-center">
-            {!imported ?
+            
             <>
+            {imported ||
             <p className="mb-5 ">No se han importado productos.</p>
-            <button onClick={()=>insertDocs()} className="bg-gray-500 w-25 hover:bg-blue-400 text-white py-3 px-4 rounded mt-3">
-            ¡Comencemos a importar!
-            </button>
-            </>
-            :
-            <>
-            <p className="mb-5 ">Importación finalizada.</p>
-            <Link to={`/`} className="bg-gray-500 w-25 hover:bg-blue-400 text-white py-3 px-4 rounded mt-3">
-            ¡Volver al inicio!
-            </Link>
-            </>
             }
+            </>
+
+            {imported || <button onClick={handleInsertDocs} className="bg-gray-500 w-25 hover:bg-blue-400 text-white py-3 px-4 rounded mt-3">¡Comencemos a importar!</button>}
+
+            <> 
+          
+            {prods.length>0 && prods.map((item,index) => <p key={index} className="mt-3">Producto {item.title} <strong>importado</strong> correctamente.</p>)}
+            {imported && <p className="mt-5"><Link to={`/`} className="bg-gray-500 w-25 hover:bg-blue-400 text-white py-3 px-4 rounded mt-3">
+            ¡Volver al inicio!
+            </Link></p>
+            }
+
+            </>
+            
         </div>
 
         </div>
