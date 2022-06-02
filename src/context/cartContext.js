@@ -17,7 +17,10 @@ const CartContextProvider = ({children}) =>{
     const productosData = [];
     
     productos().then(resp => resp.map(item => {
-        productosData.push(item.data());
+        productosData.push({
+            id: item.id,
+            ...item.data()
+        });
     }));
 
    

@@ -2,7 +2,7 @@ import {Link} from "react-router-dom";
 import {useCartContext} from "../context/cartContext";
 
 
-export default function Item({key,features,isCart=false}) {
+export default function Item({features,isCart=false}) {
 
     const {removeItem} = useCartContext();
 

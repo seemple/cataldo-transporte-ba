@@ -3,11 +3,26 @@ import React,{useState,useEffect} from "react";
 import { useParams } from "react-router-dom";
 import Loader from "./Loader";
 import {useCartContext} from "../context/cartContext";
+import firebaseConnect from "../data/firebase";
+import {doc,getDoc,getFirestore} from "firebase/firestore";
 
-const getItem = (itemId=null,productos) =>{
 
 
-  let selectedItem = itemId ? productos.find((item)=> item.id == itemId) : null;
+const getItem = (itemId=null) =>{
+
+  firebaseConnect();
+  const db = getFirestore();
+  let selectedItem = null;
+  let dbQuery = null;
+
+  if (itemId) {
+    dbQuery = doc(db,"productos",itemId); 
+    selectedItem = getDoc(dbQuery).then(response => {
+      return({
+        ...response.data()
+      })
+    });
+  }
   
   return new Promise((resolve,reject)=>{  
     setTimeout(()=>{
@@ -27,9 +42,10 @@ export default function ItemDetailContainer(){
     const {productosData} = useCartContext();
 
 
+
     useEffect(()=>{
       
-      getItem(itemId,productosData)
+      getItem(itemId)
           .then(res => setProduct(res))
           .catch(err => setError(true))
           .finally(res => setLoading(false));
