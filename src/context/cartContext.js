@@ -26,9 +26,16 @@ const CartContextProvider = ({children}) =>{
    
     const [cart,setCart] = useState([]);
     const [total,setTotal] = useState(0);
+    const [checkedOut,setCheckedOut] = useState(false);
 
     const isInCart = (id) => {
         return (cart.find( i => i.id == id)) 
+    };
+
+    const buyer = {
+        name: "Juan Martin",
+        phone: "5411-345-6789",
+        email: "jmcataldo@gmail.com"
     };
 
     const getTotalCart = () =>{
@@ -43,8 +50,13 @@ const CartContextProvider = ({children}) =>{
         setCart(cart.filter(item => item.id !== id))
     }
 
-    const removeAllItems = (id) => {
+    const removeAllItems = () => {
         setCart([]);
+    }
+
+    const checkOutOrder = () => {
+        setCart([]);
+        setCheckedOut(true);
     }
 
 	const handleOnAddItem = (cantidad,item) =>{
@@ -77,7 +89,7 @@ const CartContextProvider = ({children}) =>{
     }
     
     return (
-        <contextCart.Provider value={{ productosData,cart,total,handleOnAddItem,removeItem,removeAllItems,getTotalCart }}>
+        <contextCart.Provider value={{ productosData,cart,total,checkedOut, buyer, handleOnAddItem,removeItem,removeAllItems,getTotalCart,checkOutOrder }}>
             {children}
         </contextCart.Provider>
     )
