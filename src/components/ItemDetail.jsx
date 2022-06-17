@@ -1,28 +1,22 @@
 import React from "react";
 import {Link} from "react-router-dom";
 import ItemCount from "./ItemCount";
-
-
-// Hay que importar el context que he creado en el padre 
 import {useCartContext} from "../context/cartContext";
 
 
-export default function ItemDetail({item,hasError}){
+export default function ItemDetail({item}){
 
-    // Aqui ya "consumo" la data del context
     const {handleOnAddItem} = useCartContext()
-    const {cart} = useCartContext()
-
 
 	return (
 	
 	<div className="bg-white">
 
-		{hasError ?
+		{Object.values(item).length < 1 ?
 
 		<div className="pt-6">
 			<div className="bg-red-100 border w-1/2 mx-auto border-red-400 text-red-700 px-4 p-3 rounded " role="alert">
-				<strong className="font-bold">Ups!</strong>
+				<strong className="font-bold">¡Ups!</strong>
 				<span className="block sm:inline ml-2">No se encontró el producto solicitado.</span>
 				<span className="absolute top-0 bottom-0 right-0 px-4 py-3">
 					<svg className="fill-current h-6 w-6 text-red-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Close</title><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/></svg>

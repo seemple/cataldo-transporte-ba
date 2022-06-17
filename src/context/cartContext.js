@@ -1,21 +1,23 @@
 import { createContext,useContext,useState } from "react";
 import productos from "../data";
 
-// Creamos el contexto de la App.
+// Context App Created from React
 const contextCart = createContext([]);
 
-// Exporto el useContext para consumir los datos facilmente y ahorrar imports.
+// Exported CartContext to easily get data and functions.
 export const useCartContext = () => useContext(contextCart);
 
 
-// Creamos el provider con estado y funciones globales. 
-const CartContextProvider = ({children}) =>{
+// Cart Context provider Component with global state, functions and data.
 
-    
-    // Aca van estado y funciones globales
+const CartContextProvider = ({children}) =>{
 
     const productosData = [];
     
+    const [cart,setCart] = useState([]);
+    const [total,setTotal] = useState(0);
+    const [checkedOut,setCheckedOut] = useState(false);
+
     productos().then(resp => resp.map(item => {
         productosData.push({
             id: item.id,
@@ -23,20 +25,16 @@ const CartContextProvider = ({children}) =>{
         });
     }));
 
-   
-    const [cart,setCart] = useState([]);
-    const [total,setTotal] = useState(0);
-    const [checkedOut,setCheckedOut] = useState(false);
-
-    const isInCart = (id) => {
-        return (cart.find( i => i.id == id)) 
-    };
-
     const buyer = {
         name: "Juan Martin",
         phone: "5411-345-6789",
         email: "jmcataldo@gmail.com"
     };
+
+    const isInCart = (id) => {
+        return (cart.find( i => i.id == id)) 
+    };
+
 
     const getTotalCart = () =>{
         let totalCart = cart.reduce((prev,next)=>{
@@ -63,7 +61,6 @@ const CartContextProvider = ({children}) =>{
 
 		let newCart = [];
 
-		
 		if(isInCart(item.id)) {
 			
 			newCart = cart.map((i) => {

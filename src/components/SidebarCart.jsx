@@ -1,8 +1,5 @@
 import React,{useState,useEffect} from "react";
 import {Link,NavLink} from "react-router-dom";
-
-
-// Hay que importar el context que he creado en el padre 
 import {useCartContext} from "../context/cartContext";
 
 

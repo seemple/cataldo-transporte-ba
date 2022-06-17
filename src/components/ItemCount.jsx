@@ -4,11 +4,11 @@ import {Link} from "react-router-dom";
 
 export default function ItemCount({stock=1,initial=1,item,onAdd}){
 
-    const [count,setCount] = useState(stock);
+    const [count,setCount] = useState(initial);
     const [addedToCart,setAdded] = useState(false);
     
     const incrementar = () =>{
-        let newCount = count;
+        let newCount = parseInt(count);
         setCount(newCount < stock ? newCount +=1 : count); 
     };
 

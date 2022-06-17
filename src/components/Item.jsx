@@ -9,7 +9,9 @@ export default function Item({features,isCart=false}) {
     return(    
         <div className="group relative">
         <div className="w-full min-h-80 bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:h-80 lg:aspect-none">
-            <img src={features.image} alt="Front of men&#039;s Basic Tee in black." className="w-full h-full object-center object-cover lg:w-full lg:h-full" />
+            <Link to={`/product/${features.id}`}>
+                <img src={features.image} alt="Front of men&#039;s Basic Tee in black." className="w-full h-full object-center object-cover lg:w-full lg:h-full" />
+            </Link>
         </div>
         <div className="mt-4 flex justify-between">
             <div>
@@ -19,7 +21,7 @@ export default function Item({features,isCart=false}) {
                     {features.title}
                 </Link>
                 </h3>
-                {features.category || <p className="mt-1 text-sm text-gray-500 mb-2">{features.category}</p>}
+                {features.category && <p className="mt-1 text-sm text-gray-500 mb-2">{features.category}</p>}
                 { isCart &&
                         <> 
                         <p className="mt-1 text-sm text-gray-500">{`Cantidad: ${features.qty} unidades`}</p>

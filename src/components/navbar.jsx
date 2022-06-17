@@ -5,12 +5,10 @@ import {useCartContext} from "../context/cartContext";
 import CartWidget from "./cartWidget";
 import React,{useState,useEffect} from "react";
 
-// Hay que importar el context que he creado en el padre 
-
 
 export default function NavBar({appName="Untitled App"}){
 
-    // Aqui ya "consumo" la data del context
+    // Geeting data from React context
     const {cart,productosData} = useCartContext();
     const [categories,setCategories] = useState([]);
     

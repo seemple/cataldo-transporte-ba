@@ -9,7 +9,7 @@ import {useCartContext} from "../context/cartContext";
 
 export default function ItemListContainer(){
 
-    // Aqui ya "consumo" la data del context
+    // Getting data from React context
     const {productosData} = useCartContext()
     
     const [products,setProducts] = useState([]);
@@ -17,31 +17,34 @@ export default function ItemListContainer(){
     const [error,setError] = useState(false);
     const {categoryId=null} = useParams();
 
+
+    const getProds = (categoryId=null) =>{
+
+      let selectedItems = categoryId ? productosData.filter((item)=> item.category == categoryId) : productosData;
+      return new Promise((resolve,reject)=>{  
+        setTimeout(()=>{
+          selectedItems.length>0 ? resolve(selectedItems) : reject(new Error("No se encontraron los productos seleccionados"));
+        },2000);
+      });
+
+    }
+
     useEffect(()=>{
-
-        // Esta promesa procesa los datos del context
-          const getProds = (categoryId=null) =>{
-
-            let selectedItems = categoryId ? productosData.filter((item)=> item.category == categoryId) : productosData;
-            return new Promise((resolve,reject)=>{  
-              setTimeout(()=>{
-                selectedItems ? resolve(selectedItems) : reject(new Error("No se encontraron los productos seleccionados"));
-              },2000);
-            });
-
-          }
-          
+      
           getProds(categoryId)
           .then(res=>{
             setProducts(res)
           })
-          .catch(err =>setError(true))
+          .catch(err => {
+            console.log(err)
+            setError(true)
+          } )
           .finally(res => setLoading(false));
 
-          return (setLoading(true));
+          return (setLoading(true),setError(false));
 
     },[categoryId]);
   
-    return ( loading ? <Loader /> : <ItemList items={products} /> )
+    return ( loading ? <Loader /> : <ItemList items={products} error={error} /> )
 
 }

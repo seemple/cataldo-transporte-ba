@@ -14,9 +14,10 @@ const ImportData = () =>{
     
     const insertDocs = async () =>{
 
+        const db = getFirestore();
+        const queryCollection = collection(db,"productos");
+
         for (let producto of productosData) {
-            const db = getFirestore();
-            const queryCollection = collection(db,"productos");
             const res = await addDoc(queryCollection,{...producto});
             setProds(prods =>[...prods,producto]);
         };
