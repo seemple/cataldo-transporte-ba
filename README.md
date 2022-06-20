@@ -28,7 +28,7 @@ La app se re-iniciará cuando realices cambios en el código. Y puedes ver lint 
 ### Importación de items:
 La app cuenta con una funcionalidad para importar productos en formato JSON hacia la base de datos alojada en la nube de FireStore.
 
-Para ello, puedes navegar a **/importData**. Desde esta URL podrás importar toda la información que se encuentra en el archivo JSON ubicado en **/data/oldMockupData.js**.
+Para ello, puedes navegar a **/importar-productos**. Desde esta URL podrás importar toda la información que se encuentra en el archivo JSON ubicado en **/data/oldMockupData.js**.
 
 **¡Cuidado!** Antes de importar asegurate de respetar el formato pre-establecido en el archivo *oldMoldMockupData.js* para que la app funcione correctamente.
 
