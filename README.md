@@ -15,8 +15,8 @@ El mencionado stack utiliza los siguientes lenguajes:
 
 ### Instalación
 Para instalar el proyecto debes clonar el repositorio de código en tu equipo local:
-- Via SSH: [git@github.com:seemple/cataldo-transporte-ba.git](git@github.com:seemple/cataldo-transporte-ba.git)
-- Via HTTPS: https://github.com/seemple/cataldo-transporte-ba.git
+- Via SSH: [git@github.com:seemple/detodo-store.git](git@github.com:seemple/detodo-store.git)
+- Via HTTPS: https://github.com/seemple/detodo-store.git
 
 Una vez clonado debes ejecutar desde la terminal  el comando `npm install`. El mismo instalará todas las dependencias del proyecto para que puedas comenzar a trabajar con él.
 
