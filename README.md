@@ -24,6 +24,14 @@ Una vez clonado debes ejecutar desde la terminal  el comando `npm install`. El m
 Desde la terminal, utiliza el comando `npm start`. Ejecutarás la app en modo desarrollo. Puedes navegarla en [http://localhost:3000](http://localhost:3000) desde tu  navegador.
 La app se re-iniciará cuando realices cambios en el código. Y puedes ver lint errors en la consola de tu editor.
 
+
+### Importación de items:
+La app cuenta con una funcionalidad para importar productos en formato JSON hacia la base de datos alojada en la nube de FireStore.
+
+Para ello, puedes navegar a **/importData**. Desde esta URL podrás importar toda la información que se encuentra en el archivo JSON ubicado en **/data/oldMockupData.js**.
+
+**¡Cuidado!** Antes de importar asegurate de respetar el formato pre-establecido en el archivo *oldMoldMockupData.js* para que la app funcione correctamente.
+
 ### Produccion
 Des terminal, utiliza el comando `npm run build` . Este compila la app para producción en la carpeta `build`. 
 
