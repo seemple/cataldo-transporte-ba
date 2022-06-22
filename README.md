@@ -44,3 +44,4 @@ Finalmente, cuando estes conforme con tu pedido, podrás proceder a realizar una
 
 ### DEMO
 Puede probar el uso de la app [en esta versión demo](https://detodo-store-martin1.vercel.app/)
+**Aclaración:** La demo posee algunos elementos de UI que están a modo ilustrativo y no poseen funcionalidad. *Por ejemplo: Las imágenes en el Detalle de Item.*
